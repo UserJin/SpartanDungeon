@@ -17,11 +17,13 @@ public class Interaction : MonoBehaviour
     public TextMeshProUGUI promptText;
     private Camera cam;
 
+    // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
     }
 
+    // Update is called once per frame
     void Update()
     {
         if(Time.time - lastCheckTime > checkRate)

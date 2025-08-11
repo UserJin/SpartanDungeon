@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
@@ -10,7 +9,7 @@ public class CharacterManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
+            if( _instance == null )
             {
                 _instance = new GameObject("CharacterManager").AddComponent<CharacterManager>();
             }
@@ -28,14 +27,14 @@ public class CharacterManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null)
+        if(_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            if (_instance != this)
+            if(_instance != this)
                 Destroy(gameObject);
         }
     }

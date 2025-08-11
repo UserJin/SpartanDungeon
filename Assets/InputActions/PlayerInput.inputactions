@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Run",
+                    "name": "Inventory",
                     "type": "Button",
                     "id": "522c2e2e-a38d-41b6-bb13-fa3a196f67d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchCam",
+                    "type": "Button",
+                    "id": "091c4ece-20bb-42db-b188-c1b3209fab07",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -143,11 +152,22 @@
                 {
                     "name": "",
                     "id": "83c6caca-947e-425f-8cc5-f4e1df91b8ee",
-                    "path": "",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Run",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "26096889-0a8c-4390-9927-71da59462664",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

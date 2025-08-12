@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stat", menuName = "New Stat")]
+[CreateAssetMenu(fileName = "Stat", menuName = "Data/New Stat")]
 public class StatData : ScriptableObject
 {
     [Header("Condition")]

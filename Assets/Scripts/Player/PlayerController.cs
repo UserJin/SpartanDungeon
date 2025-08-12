@@ -9,8 +9,12 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float jumpPower;
+    public float sprintSpeed;
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
+    public bool canMove = true;
+    public float moveCoolTime = 0f;
+    private bool isSprint = false;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -22,16 +26,17 @@ public class PlayerController : MonoBehaviour
     public bool canLook = true;
 
     public Action inventory;
-
+    private StatData _statData;
     private Rigidbody _rigidbody;
+    private PlayerCondition _condition;
 
     private IEnumerator curCotoutine;
 
-    private StatData _statData;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _condition = GetComponent<PlayerCondition>();
     }
 
     private void Start()
@@ -44,7 +49,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if(canMove)
+            Move();
+        else
+        {
+            moveCoolTime += Time.fixedDeltaTime;
+            if (IsGrounded() && moveCoolTime > 1f)
+            {
+                canMove = true;
+                moveCoolTime = 0;
+            }
+        }
     }
 
     private void LateUpdate()
@@ -57,7 +72,19 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
+        if (isSprint)
+        {
+            if (_condition.UseStamina(1f) && curMovementInput != Vector2.zero)
+                dir *= sprintSpeed;
+            else
+            {
+                isSprint = false;
+            }
+        }
+
         dir.y = _rigidbody.velocity.y;
+
+
 
         _rigidbody.velocity = dir;
     }
@@ -103,6 +130,14 @@ public class PlayerController : MonoBehaviour
             inventory?.Invoke();
             ToggleCursor();
         }
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            isSprint = true;
+        else if (context.phase == InputActionPhase.Canceled)
+            isSprint = false;
     }
 
     void ToggleCursor()

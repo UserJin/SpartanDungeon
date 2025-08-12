@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour, IInteractable
+public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
-    string interactTxt;
+    protected string interactTxt;
 
     public string GetInteractPrompt()
     {
-        return null;
+        return interactTxt;
     }
-
-    public void OnInteract()
-    {
-        
-    }
+    public abstract void OnInteract();
 }

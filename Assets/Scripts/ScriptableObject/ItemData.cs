@@ -24,7 +24,7 @@ public class ItemDataConsumable
     public float value;
 }
 
-[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
+[CreateAssetMenu(fileName = "Item", menuName = "Data/New Item")]
 public class ItemData : ScriptableObject
 {
     [Header("info")]

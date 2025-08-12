@@ -202,10 +202,10 @@ public class UIInventory : MonoBehaviour
                         condition.Heal(selectedItem.consumables[i].value);
                         break;
                     case ConsumableType.Speed:
-                        controller.BoostSpeedForDuration(selectedItem.consumables[i].value, 5);
+                        controller.BoostSpeedForDuration(selectedItem.consumables[i].value, selectedItem.consumables[i].time);
                         break;
                     case ConsumableType.JumpForce:
-                        controller.BoostJumpForceForDuration(selectedItem.consumables[i].value, 5);
+                        controller.BoostJumpForceForDuration(selectedItem.consumables[i].value, selectedItem.consumables[i].time);
                         break;
 
                 }

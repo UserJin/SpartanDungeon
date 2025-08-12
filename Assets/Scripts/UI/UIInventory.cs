@@ -50,6 +50,7 @@ public class UIInventory : MonoBehaviour
         }
 
         ClearSelectedItemWindow();
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -199,6 +200,12 @@ public class UIInventory : MonoBehaviour
                 {
                     case ConsumableType.Health:
                         condition.Heal(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.Speed:
+                        controller.BoostSpeedForDuration(selectedItem.consumables[i].value, 5);
+                        break;
+                    case ConsumableType.JumpForce:
+                        controller.BoostJumpForceForDuration(selectedItem.consumables[i].value, 5);
                         break;
 
                 }

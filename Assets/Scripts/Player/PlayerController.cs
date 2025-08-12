@@ -23,8 +23,11 @@ public class PlayerController : MonoBehaviour
 
     public Action inventory;
 
-
     private Rigidbody _rigidbody;
+
+    private IEnumerator curCotoutine;
+
+    private StatData _statData;
 
     private void Awake()
     {
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        _statData = CharacterManager.Instance.Player.statData;
+        moveSpeed = _statData.moveSpeed;
+        jumpPower = _statData.jumpForce;
     }
 
     private void FixedUpdate()
@@ -125,5 +131,35 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void BoostSpeedForDuration(float speed, float duration)
+    {
+        if(curCotoutine != null)
+            StopCoroutine(curCotoutine);
+        curCotoutine = SpeedUp(speed, duration);
+        StartCoroutine(curCotoutine);
+    }
+
+    public void BoostJumpForceForDuration(float jumpForce, float duration)
+    {
+        if (curCotoutine != null)
+            StopCoroutine(curCotoutine);
+        curCotoutine = JumpForceUp(jumpForce, duration);
+        StartCoroutine(curCotoutine);
+    }
+
+    IEnumerator SpeedUp(float speed, float duration)
+    {
+        moveSpeed = speed;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = _statData.moveSpeed;
+    }
+
+    IEnumerator JumpForceUp(float jumpForce, float duration)
+    {
+        jumpPower = jumpForce;
+        yield return new WaitForSeconds(duration);
+        jumpPower = _statData.jumpForce;
     }
 }

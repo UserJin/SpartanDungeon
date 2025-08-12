@@ -16,6 +16,12 @@ public class MovingPad : MonoBehaviour
             destPos = transform.position;
     }
 
+    private void Update()
+    {
+        float t = Mathf.PingPong(Time.time * speed, 1f);
+        transform.position = Vector3.Lerp(startPos, destPos, t);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         collision.gameObject.transform.SetParent(transform);

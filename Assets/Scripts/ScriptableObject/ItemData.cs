@@ -14,7 +14,21 @@ public enum ConsumableType
     Health,
     Stamina,
     Speed,
-    JumpForce,
+    JumpForce
+}
+
+public enum EquipType
+{
+    Tool,
+    Armor
+}
+
+public enum StatusType
+{
+    Health,
+    Stamina,
+    Speed,
+    JumpForce
 }
 
 [Serializable]
@@ -23,6 +37,13 @@ public class ItemDataConsumable
     public ConsumableType type;
     public float value;
     public float time;
+}
+
+[Serializable]
+public class ItemDataEquip
+{
+    public StatusType statusType;
+    public float value;
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Data/New Item")]
@@ -43,5 +64,8 @@ public class ItemData : ScriptableObject
     public ItemDataConsumable[] consumables;
 
     [Header("Equip")]
+    public EquipType equipType;
+    public ItemDataEquip[] equips;
     public GameObject equipPrefab;
+    
 }

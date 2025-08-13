@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerCondition condition;
-    public Equipment equipment;
+    public Equipment equip;
 
     public ItemData itemData;
     public Action addItem;
@@ -21,6 +21,6 @@ public class Player : MonoBehaviour
         CharacterManager.Instance.Player = this;
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
-        equipment = GetComponent<Equipment>();
+        equip = GetComponent<Equipment>();
     }
 }

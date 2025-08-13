@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpPower;
     public float sprintSpeed;
+    [SerializeField] private float equipMoveSpeed;
+    [SerializeField] private float equipJumpPower;
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
     public bool canMove = true;
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator curCotoutine;
 
+    public void AddEquipMoveSpeed(float amount) { equipMoveSpeed += amount; }
+    public void AddEquipJumpPower(float amount) { equipJumpPower += amount; }
 
     private void Awake()
     {
@@ -71,7 +75,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= (moveSpeed + equipMoveSpeed);
         if (isSprint)
         {
             if (_condition.UseStamina(1f) && curMovementInput != Vector2.zero)
@@ -119,7 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Started && IsGrounded())
         {
-            _rigidbody.AddForce(Vector2.up * jumpPower , ForceMode.Impulse);
+            _rigidbody.AddForce(Vector2.up * (jumpPower+equipJumpPower) , ForceMode.Impulse);
         }
     }
 
@@ -197,4 +201,5 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(duration);
         jumpPower = _statData.jumpForce;
     }
+
 }

@@ -240,14 +240,22 @@ public class UIInventory : MonoBehaviour
 
     public void OnEquipButton()
     {
-        if (slots[curEquipIndex].equipped)
+        switch(slots[selectedItemIndex].item.equipType)
         {
-            UnEquip(curEquipIndex);
+            case EquipType.Tool:
+                if (slots[curEquipIndex].equipped)
+                {
+                    UnEquip(curEquipIndex);
+                }
+                slots[selectedItemIndex].equipped = true;
+                curEquipIndex = selectedItemIndex;
+                CharacterManager.Instance.Player.equip.EquipNewTool(selectedItem);
+                break;
+            case EquipType.Armor:
+                slots[selectedItemIndex].equipped = true;
+                CharacterManager.Instance.Player.equip.EquipNewArmor(selectedItem);
+                break;
         }
-
-        slots[selectedItemIndex].equipped = true;
-        curEquipIndex = selectedItemIndex;
-        CharacterManager.Instance.Player.equipment.EquipNew(selectedItem);
         UpdateUI();
 
         SelectItem(selectedItemIndex);
@@ -256,7 +264,15 @@ public class UIInventory : MonoBehaviour
     void UnEquip(int index)
     {
         slots[index].equipped = false;
-        CharacterManager.Instance.Player.equipment.Unequip();
+        switch (slots[selectedItemIndex].item.equipType)
+        {
+            case EquipType.Tool:
+                CharacterManager.Instance.Player.equip.UnequipTool();
+                break;
+            case EquipType.Armor:
+                CharacterManager.Instance.Player.equip.UnEquipArmor();
+                break;
+        }
         UpdateUI();
 
         if(selectedItemIndex == index)

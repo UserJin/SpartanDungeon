@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Equip : MonoBehaviour
+public class EquipArmor : Equip
 {
-
+    public ItemData data;
 }

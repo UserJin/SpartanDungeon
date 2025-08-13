@@ -25,7 +25,7 @@ public class EquipTool : Equip
         cam = Camera.main;
     }
 
-    public override void OnAttackInput()
+    public void OnAttackInput()
     {
         if(!attacking)
         {
